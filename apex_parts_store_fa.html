@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="فروشگاه تخصصی قطعات خودرو؛ جست‌وجوی قطعه، بررسی سازگاری با خودرو و دریافت مشاوره تخصصی خرید.">
+  <title>آپکس پارت | فروشگاه تخصصی قطعات خودرو</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin:0; background:#0a0a0a; color:#eee; font-family:'Vazirmatn',sans-serif; }
+    .glass { background:rgba(35,35,35,.72); backdrop-filter:blur(18px); border:1px solid rgba(255,255,255,.10); }
+    .accent { color:#77b7ff; }
+    .btn-primary { background:#e8edf3; color:#111; transition:.25s; }
+    .btn-primary:hover { background:#8fc5ff; transform:translateY(-2px); }
+    .outline-btn { border:1px solid rgba(255,255,255,.2); transition:.25s; }
+    .outline-btn:hover { border-color:#8fc5ff; color:#8fc5ff; }
+    .hero-overlay { background:linear-gradient(90deg,rgba(5,7,10,.92) 0%,rgba(5,7,10,.68) 48%,rgba(5,7,10,.2) 100%),linear-gradient(0deg,#0a0a0a 0%,transparent 35%); }
+    .product-card { background:linear-gradient(145deg,rgba(38,38,38,.92),rgba(19,19,19,.96)); border:1px solid rgba(255,255,255,.09); transition:.3s; }
+    .product-card:hover { transform:translateY(-6px); border-color:rgba(119,183,255,.55); box-shadow:0 18px 50px rgba(0,0,0,.35); }
+    .category-card img { transition:transform .7s; }
+    .category-card:hover img { transform:scale(1.07); }
+    .muted { color:#a8adb5; }
+    .material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 350,'GRAD' 0,'opsz' 24; vertical-align:middle; }
+    input,select { font-family:inherit; }
+    .toast { opacity:0; transform:translateY(12px); pointer-events:none; transition:.25s; }
+    .toast.show { opacity:1; transform:translateY(0); }
+    @media(max-width:768px) {
+      .hero-overlay { background:linear-gradient(0deg,#0a0a0a 0%,rgba(5,7,10,.72) 55%,rgba(5,7,10,.25) 100%); }
+    }
+  </style>
+</head>
+<body class="overflow-x-hidden">
+  <header class="fixed top-0 inset-x-0 z-50 glass border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 h-[76px] flex items-center justify-between gap-5">
+      <a href="#" class="flex items-center gap-3 shrink-0" aria-label="صفحه اصلی آپکس پارت">
+        <span class="w-10 h-10 rounded-xl bg-white text-black grid place-items-center font-black text-xl">A</span>
+        <span>
+          <strong class="block text-lg tracking-wide leading-5">آپکس پارت</strong>
+          <small class="text-[10px] tracking-[.18em] text-slate-400">قطعات تخصصی خودرو</small>
+        </span>
+      </a>
+      <nav class="hidden lg:flex items-center gap-8 text-sm text-slate-300">
+        <a class="hover:text-white" href="#categories">دسته‌بندی قطعات</a>
+        <a class="hover:text-white" href="#products">محصولات</a>
+        <a class="hover:text-white" href="#fitment">انتخاب بر اساس خودرو</a>
+        <a class="hover:text-white" href="#services">خدمات ما</a>
+        <a class="hover:text-white" href="#contact">تماس با ما</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <a href="#products" class="hidden sm:inline-flex text-sm text-slate-300 hover:text-white">جست‌وجو</a>
+        <button id="cartButton" class="relative w-11 h-11 rounded-xl outline-btn grid place-items-center" aria-label="سبد خرید">
+          <span class="material-symbols-outlined">shopping_bag</span>
+          <span id="cartCount" class="absolute -top-1.5 -left-1.5 bg-sky-400 text-slate-950 text-[10px] font-bold rounded-full min-w-5 h-5 px-1 grid place-items-center">۰</span>
+        </button>
+        <a href="#contact" class="hidden sm:inline-flex btn-primary rounded-xl px-5 py-3 text-xs font-bold">مشاوره خرید</a>
+        <button id="menuButton" class="lg:hidden w-10 h-10 outline-btn rounded-xl" aria-label="باز کردن منو"><span class="material-symbols-outlined">menu</span></button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="hidden lg:hidden border-t border-white/10 px-5 py-4 bg-[#111]">
+      <div class="grid gap-4 text-sm text-slate-300">
+        <a href="#categories">دسته‌بندی قطعات</a><a href="#products">محصولات</a><a href="#fitment">انتخاب بر اساس خودرو</a><a href="#services">خدمات ما</a><a href="#contact">تماس با ما</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="relative min-h-[690px] lg:min-h-[780px] flex items-center pt-24 overflow-hidden">
+      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwvctaZbqyymc3gSxePLq9pzeqr-9uiawoPIGhXnr7fFL0m9PLyWI_j_D2UmUS-0ozCPG3CLyTvaQdwTURjiHdFBUPeqvLgCHVzkTquaEw1Pop0DqgdeaKIB_Wp6pQJG95HqlPHiWuIxtH7t4R70aw_KUpDJM53IRkR-0Opgdysgu_DHSBfm3j_TjVfDAeRg_WsIINdsEeK0PBY_PFWOs1JtJ6z3IndojQgA3cRCwViQ-l06F-AnGvQkrFIvpkrHFGi_70iNxG84k" alt="خودروی اسپرت در فضای کارگاهی مدرن" class="absolute inset-0 w-full h-full object-cover object-center">
+      <div class="absolute inset-0 hero-overlay"></div>
+      <div class="relative max-w-7xl mx-auto w-full px-5 lg:px-8 py-20">
+        <div class="max-w-2xl">
+          <div class="inline-flex items-center gap-2 border border-sky-300/30 bg-sky-300/10 rounded-full px-4 py-2 text-xs text-sky-200 mb-7">
+            <span class="w-2 h-2 rounded-full bg-sky-300"></span> انتخاب مطمئن، عملکرد بهتر
+          </div>
+          <h1 class="text-4xl sm:text-5xl lg:text-7xl font-black leading-[1.35] mb-6">قطعه درست،<br><span class="text-sky-300">عملکرد بی‌نقص.</span></h1>
+          <p class="text-slate-200 text-base sm:text-lg leading-9 max-w-xl mb-9">قطعات موردنیاز خودروی خود را با مشخصات فنی شفاف، راهنمای انتخاب و مشاوره تخصصی پیدا کنید.</p>
+          <form id="heroSearch" class="glass rounded-2xl p-2 flex flex-col sm:flex-row gap-2 max-w-xl">
+            <div class="flex-1 flex items-center gap-3 px-3">
+              <span class="material-symbols-outlined text-sky-300">search</span>
+              <input id="searchInput" class="w-full bg-transparent border-0 focus:ring-0 text-white placeholder:text-slate-400 text-sm py-3" placeholder="نام قطعه، کد فنی یا برند را وارد کنید..." aria-label="جست‌وجوی قطعه">
+            </div>
+            <button class="btn-primary rounded-xl px-7 py-3 text-sm font-bold" type="submit">جست‌وجوی قطعه</button>
+          </form>
+          <div class="flex flex-wrap gap-x-6 gap-y-3 mt-7 text-xs text-slate-300">
+            <span><span class="material-symbols-outlined text-sky-300 text-base ml-1">verified</span> راهنمای انتخاب قطعه</span>
+            <span><span class="material-symbols-outlined text-sky-300 text-base ml-1">support_agent</span> پشتیبانی تخصصی</span>
+            <span><span class="material-symbols-outlined text-sky-300 text-base ml-1">local_shipping</span> ارسال به سراسر کشور</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="fitment" class="relative z-10 -mt-8 max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="glass rounded-2xl p-6 lg:p-8 shadow-2xl">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-6">
+          <div><span class="text-sky-300 text-xs font-bold tracking-widest">راهنمای انتخاب</span><h2 class="text-2xl font-bold mt-2">قطعه سازگار با خودروی شما</h2></div>
+          <p class="muted text-sm">با انتخاب مشخصات خودرو، جست‌وجوی دقیق‌تری داشته باشید.</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <label class="text-xs text-slate-400">سال ساخت
+            <select class="mt-2 w-full bg-[#151719] border border-white/10 rounded-xl p-4 text-white"><option>انتخاب سال</option><option>۱۴۰۴</option><option>۱۴۰۳</option><option>۱۴۰۲</option><option>۱۴۰۱</option><option>۱۴۰۰</option></select>
+          </label>
+          <label class="text-xs text-slate-400">برند خودرو
+            <select class="mt-2 w-full bg-[#151719] border border-white/10 rounded-xl p-4 text-white"><option>انتخاب برند</option><option>ایران‌خودرو</option><option>سایپا</option><option>تویوتا</option><option>هیوندای</option><option>کیا</option><option>بنز</option><option>بی‌ام‌و</option></select>
+          </label>
+          <label class="text-xs text-slate-400">مدل خودرو
+            <select class="mt-2 w-full bg-[#151719] border border-white/10 rounded-xl p-4 text-white"><option>ابتدا برند را انتخاب کنید</option><option>مدل نمونه</option></select>
+          </label>
+          <button id="fitmentButton" class="btn-primary rounded-xl font-bold text-sm mt-5 sm:mt-6">نمایش قطعات سازگار</button>
+        </div>
+        <p id="fitmentMessage" class="text-xs text-sky-200 mt-4 hidden">این بخش در نسخه نمایشی است؛ برای اتصال به فهرست واقعی خودروها و قطعات آماده شده است.</p>
+      </div>
+    </section>
+
+    <section id="categories" class="py-24">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-10">
+          <div><span class="text-sky-300 text-xs font-bold tracking-widest">دسته‌بندی فروشگاه</span><h2 class="text-3xl font-bold mt-3">قطعه موردنظرتان را پیدا کنید</h2></div>
+          <p class="muted text-sm max-w-md leading-7">از قطعات فنی و مصرفی تا تجهیزات ارتقا و لوازم جانبی؛ همه‌چیز را دسته‌بندی‌شده ببینید.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
+          <a href="#products" class="category-card md:col-span-8 relative min-h-[300px] rounded-2xl overflow-hidden group">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCouC-rWI-SDhPCGkhT0ew3RuOFHe1wb4RZVhRqAtGsE4cV8aefqNy6psBi9-00bIp9jFVCkqwQ2HHf3mak4SvCy1ZsXSCQbu5oKeYNpeqceqNwbfXtoc8PTzX7Uq0Q108Ne6qLSuvl9cSixQdUox2SN4JfjQyvIjYkXqRVDtVAK-K0acDNDxjZTBwmcFzIWZzuvi8D45Zf7nHIX6enOoyAqwSvpf7qnYvtbktbQOf74EZAJLJyRAZaDQWPYmLbLpY-Kh2JKGLAEH8" alt="قطعات موتور خودرو" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-transparent"></div>
+            <div class="absolute bottom-0 right-0 p-7 lg:p-10"><span class="text-sky-300 text-xs">دسته اول</span><h3 class="text-3xl font-bold mt-2">قطعات موتور و فنی</h3><p class="text-slate-300 text-sm mt-2">قطعات اصلی و تخصصی برای نگهداری و ارتقای موتور</p><span class="inline-flex items-center gap-2 text-sm mt-5">مشاهده محصولات <span class="material-symbols-outlined">arrow_back</span></span></div>
+          </a>
+          <a href="#products" class="category-card md:col-span-4 relative min-h-[300px] rounded-2xl overflow-hidden group">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBV-OkSfb5iQ2QrayrPi2xMfzpXecrRugZibXRoNjM9o16Bzf6Vw4wt6Jhb1XohDXJFTh4o_WJ9i9u5wqd_jVjov7WYeocZer-qITXMckvepwpMf5f32mdvuTJNzMeAcc0qFnquzfPNK1nIcl1htrlq8cRQ4VsP6KiIb07KkTJF9JD3N0lzo4WPhaniPZIOmqNypyjd2N2mh0WqdhBXySLmLGomitiij9f0pW99PJtgNW6z-r6fu9LtVI71t2yvT7KZKvEHY5nw_w" alt="سیستم تعلیق خودرو" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-transparent"></div>
+            <div class="absolute bottom-0 right-0 p-7"><span class="text-sky-300 text-xs">دسته دوم</span><h3 class="text-2xl font-bold mt-2">سیستم تعلیق و جلوبندی</h3><span class="inline-flex items-center gap-2 text-sm mt-5">مشاهده محصولات <span class="material-symbols-outlined">arrow_back</span></span></div>
+          </a>
+          <a href="#products" class="category-card md:col-span-4 relative min-h-[270px] rounded-2xl overflow-hidden group">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDou6Q9KKzAF6kHyLZnKo6onqBDQOFpK1vRN3xKc6jEu1lpu3lf7HFDWTxNlP6trOAQvCHxd6c10WSOfuCQKtVz2PQJI18t9p3Ybm-9c3_fIAXCAzuwngl7iL6pOgFl1va1XpOhNABgBR9BKMg6IvgUwUGyNQs3SUqAvWmABHa_MUJ6Hh58Y6cZbRgYtMPfXyMMl_QBdnRjH_P95B1aPnzyIcVD5q8T-zJ5b7DYR6NFfoG6OwDJ7PqBe6Gd-RJ3Vr0jhVuXCoFWo8Y" alt="لوازم داخلی خودرو" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-transparent"></div>
+            <div class="absolute bottom-0 right-0 p-7"><h3 class="text-2xl font-bold">لوازم داخلی و جانبی</h3><span class="text-sm text-sky-300 mt-4 inline-block">مشاهده دسته‌بندی ←</span></div>
+          </a>
+          <a href="#products" class="category-card md:col-span-8 relative min-h-[270px] rounded-2xl overflow-hidden group">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBO1yLPkuBPLziM70Vkell9vza6MRKhFO4T7pDKByCLIRvuQpenoVhMhJI4Sx5rciW1HUkBV2gG1trOI-X_kalwoVJ-w3Wwv_zomyTAa7eenqY45hOoopsi8sHjD48davMUIbWWfHnHfeG9nRSOCgKSsy7VAxJLHi5Qr8bqPM3bOl49RBIg8JOAKe_yqwrTbZsLkC3df26erbPAosdau1GEU5rQCOhtLFN_Y1-yYIz3A-gDQjsirwupT8wqjJfWKvCBfxQugMUPVp8" alt="سیستم ترمز خودرو" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-transparent"></div>
+            <div class="absolute bottom-0 right-0 p-7 lg:p-9"><h3 class="text-3xl font-bold">سیستم ترمز و ایمنی</h3><p class="text-slate-300 text-sm mt-2">لنت، دیسک و تجهیزات مرتبط با ایمنی خودرو</p><span class="text-sm text-sky-300 mt-4 inline-block">مشاهده دسته‌بندی ←</span></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="products" class="py-24 bg-[#101112] border-y border-white/5">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-5 mb-10">
+          <div><span class="text-sky-300 text-xs font-bold tracking-widest">پیشنهادهای فروشگاه</span><h2 class="text-3xl font-bold mt-3">محصولات منتخب</h2><p class="muted text-sm mt-2">چند نمونه از محصولات قابل ارائه در فروشگاه</p></div>
+          <div class="flex gap-2 flex-wrap">
+            <button class="filter-btn btn-primary rounded-full px-4 py-2 text-xs font-bold" data-filter="all">همه محصولات</button>
+            <button class="filter-btn outline-btn rounded-full px-4 py-2 text-xs" data-filter="engine">موتور</button>
+            <button class="filter-btn outline-btn rounded-full px-4 py-2 text-xs" data-filter="performance">ارتقا و عملکرد</button>
+          </div>
+        </div>
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <article class="product-card rounded-2xl p-4 flex flex-col" data-category="engine" data-name="کیت ورودی هوای اسپرت کربنی carbon intake">
+            <div class="relative h-56 rounded-xl overflow-hidden bg-black"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxs1A1pHjK_mZ5YmRKYmmV_H6UVQi3fbar5dEXly8cLjUdHLZTjBUD42GLZh9TbvaUZL8p1iqbBtduc_bjWBxHzHPpXVMxtFODltYDol6cV-79hnSZ5QgcKxldo7DQt5EVKHFIMEKK-CYiR25ZqBHgA3f_WoO8Z_JqQ8b-awn4LBHAbezq6TeGr3Muau4LrzbXes74_NwtL6ZKOVgSknNfvCWoVVLwLMjfis2zhWL3JOkh3beyIjAM4hKYvRgeFii47ObPOYvzjEI" alt="کیت ورودی هوای کربنی" class="w-full h-full object-cover"><span class="absolute top-3 right-3 bg-sky-300 text-slate-950 text-[10px] font-bold rounded-full px-3 py-1">قطعه ارتقایی</span></div>
+            <div class="pt-5 flex-1"><div class="text-xs text-sky-300 mb-2">موتور و ورودی هوا</div><h3 class="font-bold text-lg">کیت ورودی هوای اسپرت کربنی</h3><p class="muted text-xs leading-6 mt-2">طراحی‌شده برای بهبود مسیر ورود هوا؛ سازگاری با مدل خودرو باید بررسی شود.</p><div class="flex gap-2 mt-4"><span class="text-[10px] border border-white/15 rounded-md px-2 py-1">بدنه کربنی</span><span class="text-[10px] border border-white/15 rounded-md px-2 py-1">نیازمند بررسی سازگاری</span></div></div>
+            <div class="border-t border-white/10 mt-5 pt-4 flex items-center justify-between gap-3"><div><small class="muted block text-[10px]">قیمت و موجودی</small><strong class="text-sm">استعلام از فروشگاه</strong></div><button class="add-cart btn-primary rounded-xl px-4 py-3 text-xs font-bold" data-product="کیت ورودی هوای اسپرت کربنی">افزودن به سبد</button></div>
+          </article>
+          <article class="product-card rounded-2xl p-4 flex flex-col" data-category="performance" data-name="سر اگزوز تیتانیومی titanium exhaust">
+            <div class="relative h-56 rounded-xl overflow-hidden bg-black"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgBXvZe6RcWJYnqSIgX9TI2EK4kf1S7imLJzBBvKaRgV7QN1pTuKdvJOb6IZxHeOPTVLphJCXh7yYX_sBnZgXF6SH4lLVI4FfW45jy_oye_Yxmjn-wywxAqGPRVwIgHTJ8sh9VtkWADmL2U01CdYazcykmzBepbJ3Oek8qIZWAAq9jEZRxR_iYeBqV5BhTH2rKb_z4MFxRlL0UN1FS8aLInJYXtyvIG4Kwxb_aCIbSQz-yluQgMW_pOoAoqdkrfvCxfPiyuhSox14" alt="سر اگزوز تیتانیومی" class="w-full h-full object-cover"><span class="absolute top-3 right-3 bg-white/90 text-slate-950 text-[10px] font-bold rounded-full px-3 py-1">عملکردی</span></div>
+            <div class="pt-5 flex-1"><div class="text-xs text-sky-300 mb-2">اگزوز و تیونینگ</div><h3 class="font-bold text-lg">سر اگزوز تیتانیومی</h3><p class="muted text-xs leading-6 mt-2">قطعه‌ای سبک با پرداخت فلزی؛ ابعاد و نوع اتصال پیش از سفارش بررسی شود.</p><div class="flex gap-2 mt-4"><span class="text-[10px] border border-white/15 rounded-md px-2 py-1">آلیاژ تیتانیوم</span><span class="text-[10px] border border-white/15 rounded-md px-2 py-1">تیونینگ</span></div></div>
+            <div class="border-t border-white/10 mt-5 pt-4 flex items-center justify-between gap-3"><div><small class="muted block text-[10px]">قیمت و موجودی</small><strong class="text-sm">استعلام از فروشگاه</strong></div><button class="add-cart btn-primary rounded-xl px-4 py-3 text-xs font-bold" data-product="سر اگزوز تیتانیومی">افزودن به سبد</button></div>
+          </article>
+          <article class="product-card rounded-2xl p-4 flex flex-col" data-category="performance" data-name="رینگ اسپرت فورج forged wheel">
+            <div class="relative h-56 rounded-xl overflow-hidden bg-black"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDW1APCkCOwnFJcSgekGdqwvl7jbAqaG7c-QK713qI3UeSfIaekgP2On0aI1ROf7tzi9ERIG2KTxvxZF_vJ8s-BH2D9p3uRgnldKJRaNs_y97VMgN2LekrJzf0OhJflnl-x_KEj55FzXOgvDt6j-SuVhG6-qkNEHlld9Y1kfP2wCB6MZmjQlNP6C5yY2dODgwpZnr9sE6OXEPHlixVd5F8QRxPGyCLeN9NsVRB3GajBX3X0DuibXbwWyLUjcXaVB5jmVMLMHatJT1s" alt="رینگ اسپرت فورج" class="w-full h-full object-cover"></div>
+            <div class="pt-5 flex-1"><div class="text-xs text-sky-300 mb-2">چرخ و رینگ</div><h3 class="font-bold text-lg">رینگ اسپرت فورج</h3><p class="muted text-xs leading-6 mt-2">طراحی سبک و مستحکم؛ انتخاب سایز، پیچ و آفست متناسب با خودرو ضروری است.</p><div class="flex gap-2 mt-4"><span class="text-[10px] border border-white/15 rounded-md px-2 py-1">طراحی فورج</span><span class="text-[10px] border border-white/15 rounded-md px-2 py-1">سایزبندی متنوع</span></div></div>
+            <div class="border-t border-white/10 mt-5 pt-4 flex items-center justify-between gap-3"><div><small class="muted block text-[10px]">قیمت و موجودی</small><strong class="text-sm">استعلام از فروشگاه</strong></div><button class="add-cart btn-primary rounded-xl px-4 py-3 text-xs font-bold" data-product="رینگ اسپرت فورج">افزودن به سبد</button></div>
+          </article>
+        </div>
+        <p id="emptySearch" class="hidden text-center muted py-10">محصولی با این عبارت پیدا نشد. نام یا کد قطعه را تغییر دهید.</p>
+        <div class="text-center mt-10"><a href="#contact" class="outline-btn inline-flex rounded-xl px-7 py-3 text-sm">برای مشاهده موجودی کامل با ما تماس بگیرید</a></div>
+      </div>
+    </section>
+
+    <section id="services" class="py-24">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-14 items-center">
+          <div>
+            <span class="text-sky-300 text-xs font-bold tracking-widest">چرا آپکس پارت؟</span>
+            <h2 class="text-3xl lg:text-4xl font-black leading-relaxed mt-3 mb-5">خرید قطعه، با اطمینان از انتخاب</h2>
+            <p class="muted leading-8 mb-8">انتخاب قطعه مناسب فقط به نام و ظاهر آن محدود نمی‌شود. مشخصات فنی، کد قطعه و سازگاری با مدل خودرو اهمیت زیادی دارد. ما مسیر انتخاب را برای شما شفاف‌تر می‌کنیم.</p>
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div class="glass rounded-2xl p-5"><span class="material-symbols-outlined text-sky-300 text-3xl">fact_check</span><h3 class="font-bold mt-3">بررسی سازگاری</h3><p class="muted text-xs leading-6 mt-2">کمک به تطبیق قطعه با مدل و مشخصات خودرو</p></div>
+              <div class="glass rounded-2xl p-5"><span class="material-symbols-outlined text-sky-300 text-3xl">support_agent</span><h3 class="font-bold mt-3">مشاوره تخصصی</h3><p class="muted text-xs leading-6 mt-2">پاسخ‌گویی برای انتخاب و خرید آگاهانه</p></div>
+              <div class="glass rounded-2xl p-5"><span class="material-symbols-outlined text-sky-300 text-3xl">inventory_2</span><h3 class="font-bold mt-3">اطلاع از موجودی</h3><p class="muted text-xs leading-6 mt-2">استعلام وضعیت موجودی و زمان تأمین قطعه</p></div>
+              <div class="glass rounded-2xl p-5"><span class="material-symbols-outlined text-sky-300 text-3xl">local_shipping</span><h3 class="font-bold mt-3">ارسال سفارش</h3><p class="muted text-xs leading-6 mt-2">هماهنگی روش و هزینه ارسال پیش از نهایی‌سازی خرید</p></div>
+            </div>
+          </div>
+          <div class="relative">
+            <div class="absolute -inset-5 bg-sky-400/10 blur-3xl rounded-full"></div>
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaRmhRSyfQKPfY0DTQG2ExjGPy3Kd2t6KY8DFfdfgJVWcYlRtuQPL_hJ2Q_l-bSQUWX00uBl-gIePkxb1us9x930Jr1Otq6o1UX0KMr2j3cdENsLnt20iXzdeM3gq1aGsMmMDYBVRBKlkXkki44IxARWk4Yu2duWDSjsDFbP8PazJOZPfcOlLkLi0NyCLvxB36gAlCk6dQv9s70qmKgG4a2b-skTUiVq9AVjEfhxOZtAJvi7KxX5Aie9z02ru2x9rjEPbStOcnn7w" alt="تجهیزات و قطعات خودرو در فضای تخصصی" class="relative w-full h-[500px] object-cover rounded-3xl border border-white/10">
+            <div class="absolute bottom-5 right-5 left-5 glass rounded-2xl p-5"><p class="text-sm font-bold">برای انتخاب قطعه مناسب، از ما کمک بگیرید.</p><p class="muted text-xs mt-2">مشخصات خودرو یا کد فنی قطعه را در اختیار کارشناسان ما قرار دهید.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 bg-[#111315] border-y border-white/5">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div><span class="text-sky-300 text-xs font-bold">نیاز به راهنمایی دارید؟</span><h2 class="text-2xl lg:text-3xl font-bold mt-3">قبل از خرید، از سازگاری قطعه مطمئن شوید.</h2><p class="muted text-sm mt-3">کارشناسان ما برای بررسی مشخصات و راهنمایی خرید در کنار شما هستند.</p></div>
+        <a href="#contact" class="btn-primary rounded-xl px-8 py-4 text-sm font-bold whitespace-nowrap">ارتباط با کارشناسان</a>
+      </div>
+    </section>
+
+    <section id="contact" class="py-24">
+      <div class="max-w-4xl mx-auto px-5 text-center">
+        <span class="text-sky-300 text-xs font-bold tracking-widest">ارتباط با ما</span>
+        <h2 class="text-3xl font-bold mt-3">سفارش یا استعلام قطعه دارید؟</h2>
+        <p class="muted text-sm leading-7 mt-4 max-w-2xl mx-auto">برای دریافت قیمت، بررسی موجودی یا مشاوره انتخاب قطعه، اطلاعات خود را ثبت کنید یا از راه‌های ارتباطی فروشگاه استفاده کنید.</p>
+        <form id="contactForm" class="glass rounded-2xl p-5 sm:p-7 mt-9 text-right grid sm:grid-cols-2 gap-4">
+          <label class="text-xs text-slate-400">نام و نام خانوادگی<input required class="mt-2 w-full bg-[#111] border border-white/10 rounded-xl p-4 text-white" placeholder="نام شما"></label>
+          <label class="text-xs text-slate-400">شماره تماس<input required type="tel" class="mt-2 w-full bg-[#111] border border-white/10 rounded-xl p-4 text-white" placeholder="09xxxxxxxxx"></label>
+          <label class="text-xs text-slate-400 sm:col-span-2">قطعه یا درخواست شما<textarea required rows="3" class="mt-2 w-full bg-[#111] border border-white/10 rounded-xl p-4 text-white" placeholder="نام قطعه، کد فنی یا مدل خودرو را بنویسید..."></textarea></label>
+          <button class="btn-primary rounded-xl py-4 font-bold text-sm sm:col-span-2" type="submit">ثبت درخواست تماس</button>
+          <p id="contactMessage" class="hidden text-sky-200 text-xs sm:col-span-2">این فرم در نسخه نمایشی است و برای دریافت واقعی درخواست‌ها باید به سامانه فروشگاه متصل شود.</p>
+        </form>
+        <div class="flex flex-wrap justify-center gap-6 text-xs muted mt-8"><span>تلفن فروشگاه: پس از تأیید مالک درج شود</span><span>ساعات پاسخ‌گویی: قابل تنظیم</span><span>نشانی: قابل تکمیل</span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-[#070808] border-t border-white/10 py-10">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3"><span class="w-9 h-9 rounded-lg bg-white text-black grid place-items-center font-black">A</span><div><strong>آپکس پارت</strong><small class="block text-[10px] text-slate-500 mt-1">فروشگاه تخصصی قطعات خودرو</small></div></div>
+      <nav class="flex flex-wrap justify-center gap-6 text-xs muted"><a href="#categories">دسته‌بندی‌ها</a><a href="#products">محصولات</a><a href="#services">خدمات</a><a href="#contact">تماس با ما</a></nav>
+      <p class="text-[10px] text-slate-600">© تمامی حقوق این وب‌سایت محفوظ است.</p>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast fixed bottom-5 left-5 z-[60] glass rounded-xl px-5 py-4 text-sm shadow-2xl"></div>
+  <script>
+    const $ = (s) => document.querySelector(s);
+    let cart = [];
+    function showToast(message) {
+      const toast = $('#toast'); toast.textContent = message; toast.classList.add('show');
+      clearTimeout(window.toastTimer); window.toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
+    }
+    $('#menuButton').addEventListener('click', () => $('#mobileMenu').classList.toggle('hidden'));
+    document.querySelectorAll('#mobileMenu a').forEach(a => a.addEventListener('click', () => $('#mobileMenu').classList.add('hidden')));
+    document.querySelectorAll('.add-cart').forEach(button => button.addEventListener('click', () => {
+      cart.push(button.dataset.product);
+      $('#cartCount').textContent = String(cart.length).replace(/[0-9]/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+      showToast('«' + button.dataset.product + '» به سبد نمایشی اضافه شد.');
+    }));
+    $('#cartButton').addEventListener('click', () => {
+      showToast(cart.length ? 'اقلام سبد: ' + cart.join('، ') : 'سبد خرید شما هنوز خالی است.');
+    });
+    function filterProducts(term, category='all') {
+      const cards = [...document.querySelectorAll('.product-card')]; let visible = 0;
+      cards.forEach(card => {
+        const matchTerm = !term || card.dataset.name.includes(term.toLowerCase());
+        const matchCategory = category === 'all' || card.dataset.category === category;
+        const show = matchTerm && matchCategory; card.classList.toggle('hidden', !show); if(show) visible++;
+      });
+      $('#emptySearch').classList.toggle('hidden', visible !== 0);
+    }
+    $('#heroSearch').addEventListener('submit', e => {
+      e.preventDefault(); filterProducts($('#searchInput').value.trim()); location.hash = 'products';
+    });
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => { b.classList.remove('btn-primary','font-bold'); b.classList.add('outline-btn'); });
+      btn.classList.add('btn-primary','font-bold'); btn.classList.remove('outline-btn');
+      filterProducts($('#searchInput').value.trim(), btn.dataset.filter);
+    }));
+    $('#fitmentButton').addEventListener('click', () => $('#fitmentMessage').classList.remove('hidden'));
+    $('#contactForm').addEventListener('submit', e => { e.preventDefault(); $('#contactMessage').classList.remove('hidden'); });
+  </script>
+</body>
+</html>
